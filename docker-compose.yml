@@ -1,0 +1,20 @@
+version: "2"
+
+services:
+  squid:
+    build: 
+      context: squid
+      dockerfile: Dockerfile
+      args:
+          - http_proxy=${http_proxy}
+          - https_proxy=${https_proxy}
+          - no_proxy=${no_proxy}
+    environment:
+        - PARENT_PROXY_HOST=proxy.example.com
+        - PARENT_PROXY_PORT=8080
+        - PARENT_PROXY_ID=hoge@example.com
+        - PARENT_PROXY_PW=hogepasswd
+    ports:
+     - 8080:3128
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
